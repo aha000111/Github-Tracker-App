@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
+  const [repos, setRepos] = useState([]);
 
   function handleSubmit() {
     e.preventDefault();
@@ -21,6 +22,16 @@ function App() {
     })
   }
 
+  function renderRepo(repo) {
+    return (
+      <div className="row" key={repo.id}>
+        <h2 className="repo-name">
+          {repo.name}
+        </h2>
+      </div>
+    );
+  }
+
   return (
     <div className="page">
       <div className="landing-page-container">
@@ -34,6 +45,9 @@ function App() {
               />
               <button className="button" onClick={handleSubmit}>{loading ? "Searching..." : "Search"}</button>
           </form>
+          <div className="results-container">
+            {repos.map(renderRepo)}
+          </div>
         </div>
       </div>
     </div>
