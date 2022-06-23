@@ -28,12 +28,23 @@ function App() {
 
   function renderRepo(repo) {
     return (
-      <div className="row" key={repo.id}>
+      <div className="row" onClick={() => getDetails(repo.name)} key={repo.id}>
         <h2 className="repo-name">
           {repo.name}
         </h2>
       </div>
     );
+  }
+
+  function getDetails(repoName) {
+    setDetailsLoading(true);
+    axios({
+      method: "get",
+      url: `https://api.github.com/repos/${username}/${repoName}`,
+    }).then(res => {
+      setDetailsLoading(false);
+      setDetails(res.data);
+    });
   }
 
   return (
