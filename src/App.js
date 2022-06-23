@@ -5,6 +5,21 @@ function App() {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
 
+  function handleSubmit() {
+    e.preventDefault();
+    searchRepos();
+  };
+
+  function searchRepos() {
+    setLoading(true);
+    axios({
+      method: "get"
+      url: `https://api.github.com/users/${username}/repos`,
+    }).then(res => {
+      setLoading(false);
+      setRepos(res.data);
+    })
+  }
 
   return (
     <div className="page">
