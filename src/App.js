@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import axios from 'axios';
 import './App.css';
 
 function App() {
@@ -6,7 +7,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [repos, setRepos] = useState([]);
 
-  function handleSubmit() {
+  function handleSubmit(e) {
     e.preventDefault();
     searchRepos();
   };
@@ -14,7 +15,7 @@ function App() {
   function searchRepos() {
     setLoading(true);
     axios({
-      method: "get"
+      method: "get",
       url: `https://api.github.com/users/${username}/repos`,
     }).then(res => {
       setLoading(false);
